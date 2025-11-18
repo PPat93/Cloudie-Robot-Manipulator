@@ -1,0 +1,22 @@
+PART 2
+
+theta – gripper angle grabbing object - selected by user
+delta – servo angle
+
+r = x - 130 * cos(theta)
+h = y - 130 * sin(theta)
+
+given r and h we can calculate alpha and beta from the previously created formulas
+
+A = sqrt(50^2 + 150^2 - 2 * 50 * 150 * cos(0,428 + alpha - theta)) 
+A = sqrt(25000-15000 * cos(0,428 + alpha - theta))
+
+k1 = acos((150^2 + A^2 - 50^2) / (2 * A * 150))
+k2 = pi - alpha - k1
+
+B = sqrt(31^2 + A^2 - 2 * 31 * A * cos(k2))
+
+k3 = acos((B^2 + 31^2 - A^2) / (2 * 31 * B))
+k4 = acos((61^2 + B^2 - 150^2) / (2 * 61 * B))
+
+delta = pi - k3 - k4
