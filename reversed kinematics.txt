@@ -1,0 +1,42 @@
+PART 1
+
+alpha - first servo angle
+gamma - second servo angle
+
+a = 61
+b = 71
+c = 150
+
+D = sqrt(h^2 + r^2)
+
+beta = acos((c^2 + c^2 - D^2) / (2 * c^2)) = acos(45000 - D^2 / 45000)
+alpha = arctan(h / r) + acos((c^2 + d^2 - c^2) / (2 * c * d)) = arctan(h / r) + acos(d / 300)
+
+d^2 = b^2 + c^2 - 2 * b * c * cos(180 - beta)
+d = sqrt(71^2 + 150^2 + 2 * 71 * 150 * cos(beta)) = sqrt(27541 + 21300 * cos(beta))
+
+gamma = acos((c^2 + d^2 - b^2) / (2 * c * d)) + acos((a^2 + d^2 - c^2) / (2 * a * d)) - pi/2 + alpha = 
+= acos((17459 + d^2) / (300 * d)) + acos((d^2 - 18779) / (122 * d)) + alpha - pi/2
+
+----------------------------------------------------------
+PART 2
+
+theta – gripper angle grabbing object - selected by user
+delta – servo angle
+
+r = x - 130 * cos(theta)
+h = y - 130 * sin(theta)
+
+given r and h we can calculate alpha and beta from the previously created formulas
+
+A = sqrt(50^2 + 150^2 - 2 * 50 * 150 * cos(0,428 + alpha - theta)) = sqrt(25000-15000 * cos(0,428 + alpha - theta))
+
+k1 = acos((150^2 + A^2 - 50^2) / (2 * A * 150))
+k2 = pi - alpha - k1
+
+B = sqrt(31^2 + A^2 - 2 * 31 * A * cos(k2)
+
+k3 = acos((B^2 + 31^2 - A^2) / (2 * 31 * B))
+k4 = acos((61^2 + B^2 - 150^2) / (2 * 61 * B))
+
+delta = pi - k3 - k4
