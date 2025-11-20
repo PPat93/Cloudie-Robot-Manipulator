@@ -1,0 +1,225 @@
+
+#include "hFramework.h"
+#include "hCloudClient.h"
+
+float x;
+float y;
+float z;
+float teta;
+float alfa;
+float beta;
+float gamma1;
+float delta;
+float tetar;
+int m;
+int mot1;
+
+
+hPIDRegulator pidReg;
+
+void debugConsole_task()
+{
+	char ch;
+
+	platform.printf("Wpisz znak:\r\n");
+	for (;;) {
+		if (platform.read(&ch, 1) == 1) {
+			platform.printf("echo: %c\r\n", ch);
+		}
+	}
+}
+
+void status_task()
+{
+	while (1) {
+		platform.ui.label("lb_bat").setText("%2f V", sys.getSupplyVoltage());
+		platform.ui.progressBar("pb_bat").setValue(sys.getSupplyVoltageMV() / 15); //supply voltage milivolts
+
+		sys.delay(200);
+	}
+}
+void cfgHandler()
+{
+	auto l1 = platform.ui.label("l1");
+	auto l2 = platform.ui.label("l2");
+	auto b = platform.ui.button("btn1");
+	auto slider = platform.ui.input("slider1");
+	auto input = platform.ui.input("text");
+	platform.ui.loadHtml({Resource::WEBIDE, "/ui.html"});
+//	platform.ui.video.enable();
+}
+
+void onValueChangeEvent(hId id, const char* data)
+{
+	LED1.toggle();
+	//platform.ui.console("cl1").printf("qq ");
+	if (id == "slider1") {
+		int val = atoi(data);
+
+		platform.ui.console("cl1").printf("slider %s changed to %d \n", id.str(), val);
+	} else if (id == "wspX") {
+		x = atoi(data);
+		platform.ui.console("cl2").printf("na %s jest wspolrzedna x = %f \n", id.str(), x);
+	} else if (id == "wspY") {
+		y = atoi(data);
+		platform.ui.console("cl2").printf("na %s jest wspolrzedna y = %f \n", id.str(), y);
+	} else if (id == "wspZ") {
+		z = atoi(data);
+		platform.ui.console("cl2").printf("na %s jest wspolrzedna z = %f \n", id.str(), z);
+	} else if (id == "katTeta") {
+		teta = atoi(data);
+		platform.ui.console("cl2").printf("na %s jest wspolrzedna z = %f \n", id.str(), teta);
+
+	}
+
+
+}
+
+
+void servoMotionXYZ()
+{
+	hServoModule.s1.calibrate(-90, 2400, 90, 800);
+	hServoModule.s2.calibrate(-90, 800, 90, 2400);
+	hServoModule.s3.calibrate(-90, 800, 90, 2400);
+	hServoModule.s4.calibrate(-90, 800, 90, 2400);
+	hServoModule.s5.calibrate(-90, 800, 90, 2400);
+
+	while (1) {
+		sys.delay(100);
+
+		tetar = teta * M_PI / 180;
+		float r = x - 150.0 * cosf(tetar);
+		float h = y - 150.0 * sinf(tetar);
+
+		float d1 = sqrt(pow(h, 2) + pow(r, 2));
+		float betar = acosf((45000.0 - pow(d1, 2)) / (45000.0));
+		beta = betar;
+
+		float alfar = atanf(h / r) + acosf(d1 / 300.0);
+		alfa = (180 * (alfar - (M_PI / 2))) / M_PI; //kat na serwie nr 1 -> prod, tyl
+
+		float d2 = sqrt(27541.0 + 21300.0 * cosf(betar));
+
+		float gammar = acosf((17459.0 + pow(d2, 2)) / (300.0 * d2)) + acosf((pow(d2, 2) - 18779) / (122 * d2)) + alfar - (M_PI / 2);
+		gamma1 = (180.0 * (gammar)) / M_PI;  // kat na serwie 2
+
+		float A = sqrt(25000.0 - 15000.0 * cosf(0.428 + alfar - tetar));
+		float  kat1 = acosf((20000.0 + pow(A, 2)) / (300.0 * A));
+		float kat2 = M_PI - alfar - kat1;
+		float B = sqrt(pow(27, 2) + pow(A, 2) - 2 * 27 * A * cosf(kat2));
+		float kat3 = acosf((pow(B, 2) + pow(27, 2) - pow(A, 2)) / (54 * B));
+		float kat4 = acosf((-18779.0 + pow(B, 2)) / (122.0 * B));
+
+		delta = (M_PI - kat3 - kat4) * 180.0 / M_PI; // kat na serwie 3
+
+
+		if (1) {
+			sys.delay(1000);
+			platform.ui.console("cl2").printf("d1 wynosi =  %f \n", d1);
+			platform.ui.console("cl2").printf("d2 wynosi =  %f \n", d2);
+			platform.ui.console("cl4").printf("alfa wynosi =  %f \n", alfa);
+			platform.ui.console("cl4").printf("gamma1 wynosi =  %f \n", gamma1);
+			platform.ui.console("cl4").printf("delta wynosi =  %f \n", delta);
+			platform.ui.console("cl1").printf("kat1 wynosi =  %f \n", kat1);
+			platform.ui.console("cl1").printf("A wynosi =  %f \n", A);
+
+		}
+
+
+
+	}
+
+
+}
+
+// void motor()
+// {
+// 	// hPID
+// 	pidReg.setScale(1);
+// 	pidReg.setKP(39.0);
+// 	pidReg.setKI(0.05);
+// 	pidReg.setKD(1000);
+// // hRegulator
+// 	pidReg.dtMs = 5;
+// 	pidReg.stableRange = 10;
+// 	pidReg.stableTimes = 3;
+
+// 	hMot1.attachPositionRegulator(pidReg);
+
+// }
+
+void onButtonEvent(hId id, ButtonEventType type)
+{
+
+
+	UiButton b = platform.ui.button("btn1");
+	if (id == "btn1") {
+		if (type == ButtonEventType::Pressed) {
+
+			platform.ui.console("cl2").printf("alfa wynosi =  %f \n", alfa);
+			platform.ui.console("cl2").printf("beta wynosi =  %f \n", beta);
+			platform.ui.console("cl2").printf("gamma wynosi =  %f \n", gamma1);
+			platform.ui.console("cl2").printf("katsilnika wynosi: %f \n");
+
+			hServoModule.s1.rotAbs(alfa);
+			hServoModule.s2.rotAbs(gamma1);
+			hServoModule.s3.rotAbs(delta);
+
+
+// 			while (true) {
+// 				sys.delay(30);
+
+// 				if (m == 1) {
+// 					if (hMot1.getEncoderCnt() < 0) {
+// 						hMot1.rotAbs(0);
+
+// 					}
+// 					mot1 += 10;
+// 					hMot1.rotRel(mot1);
+// 					sys.delay(30);
+
+// 				} else if (m == 2) {
+// 					if (hMot1.getEncoderCnt() > 2150) {
+// 						hMot1.rotAbs(2150);
+
+// 					}
+// 					mot1 -= 10;
+// 					hMot1.rotRel(mot1);
+
+// 					sys.delay(30);
+// 				} else if (m == 0) {
+// 					hMot1.setPower(0);
+// 					sys.delay(30);
+
+// 				}
+//			}
+		}
+
+	}
+}
+
+
+
+
+
+void hMain()
+{
+	// For connection via Android:
+	platform.begin(&RPi);
+	platform.ui.configHandler = cfgHandler;
+	platform.ui.onButtonEvent = onButtonEvent;
+
+	sys.setLogDev(&Serial);
+
+	platform.ui.onValueChangeEvent = onValueChangeEvent;
+
+	 platform.ui.setProjectId("53321f290d15eede");
+	sys.taskCreate(servoMotionXYZ, 2, 1024, 0);
+//	sys.taskCreate(motor, 2, 1024, 0);
+
+	sys.taskCreate(debugConsole_task, 2, 1000, 0);
+	sys.taskCreate(status_task, 2, 1000, 0);
+	sys.delay(20);
+
+	hServoModule.enablePower();
+}

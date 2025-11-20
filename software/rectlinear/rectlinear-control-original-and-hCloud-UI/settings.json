@@ -1,0 +1,1 @@
+{"dist-version":"testing","enable-hCloudClient":true,"enable-hSensors":true,"enable-hPython":false,"platform":"stm32","board":"core2","board-version":"0.1.0","enabled-modules":"hCloudClient,hSensors,hModules"}
