@@ -1,4 +1,5 @@
-//Author: Piotr Paterek, Kraków 05-08.2016
+//Author: Piotr Paterek, Krakï¿½w 05-08.2016
+//Coordinates Movement
 
 #include "hFramework.h"
 #include "hCloudClient.h"
