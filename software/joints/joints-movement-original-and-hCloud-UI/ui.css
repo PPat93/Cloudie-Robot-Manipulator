@@ -1,0 +1,160 @@
+body {
+    height:100% !important;
+    background: linear-gradient(to bottom right, #ffffff , #A0A0A0 )  !important;
+    background-attachment: fixed !important;
+    font-family: "Arial";
+}
+
+#cl1 {
+    position: absolute;
+    left: 0%;
+    bottom: 0;
+    width: 300px;
+    height: 300px;  
+}
+
+#slider1{
+    position: absolute;
+    left: 0px;
+    bottom: 0;
+    width: 200px;
+    height: 10px;  
+}
+
+#cl2 {
+    position: absolute;
+    left: 300px;
+    bottom: 0;
+    width: 300px;
+    height: 300px;  
+}
+#cl4 {
+    position: absolute;
+    left: 600px;
+    bottom: 0;
+    width: 300px;
+    height: 300px;  
+}
+#cl5 {
+    position: absolute;
+    left: 900px;
+    bottom: 0;
+    width: 300px;
+    height: 300px;  
+}
+#obrazek{
+    position: absolute;
+    left: 400px;
+    top: 100px;
+}
+#div_battery {
+    position: absolute;
+    left: -200px;
+    top: 0px;
+    width: 150px;
+    height: 20px;     
+}
+
+#pb_bat {
+    position: absolute;
+    left: -200px;
+    top: 20px;
+    width: 150px;
+    height: 20px;  
+}
+
+#l1 {
+    position: absolute;
+    left: 50px;
+    top: 10px;
+    width: 300px;
+    height: 20px; 
+}
+
+#l2 {
+    position: absolute;
+    left: -500px;
+    top: 130px;
+    width: 150px;
+}
+
+#btn1 {
+    position: absolute;
+    left: 250px;
+    top: 80px;
+    width: 150px;
+}
+
+#btn2 {
+    position: absolute;
+    left: 250px;
+    top: 120px;
+    width: 150px;
+}
+    
+#slider{
+    position: absolute;
+    left: -500px;
+    top: 100px;
+    width: 300px;
+
+}
+
+    #servo-container {
+        position: absolute;
+        margin: auto;
+        right: 0;
+        top: 0;
+        width: 600px; 
+        height: 600px; 
+        display: block;
+    }
+
+@media (max-width: 1000px) and (min-width: 100px) {
+    #video-container {
+        position: absolute;
+        margin: auto;
+        left: 50%;
+        top: 30%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 300px; 
+        height: 400px; 
+        display: block;
+    }
+
+    #status-container {
+        position: absolute;
+        margin: auto;
+        left: 50%;
+        top: 0;
+        transform: translateX(-50%);
+        width: 220px; 
+        height: 250px; 
+        display: block;
+        /* border:3px solid #73AD21; */
+    }
+
+}
+@media (min-width: 1000px) {
+    #video-container {
+        position: absolute;
+        margin: auto;
+        left: 50%;
+        top: 50%;
+        transform: translateY(-50%) translateX(-50%);
+        width: 600px; 
+        height: 800px; 
+        display: block;
+    }
+
+    #status-container {
+        position: absolute;
+        margin: auto;
+        right: 50px;
+        top: 20%;
+        width: 220px; 
+        height: 250px; 
+        display: block;
+        /* border:3px solid #73AD21; */
+    }
+}
