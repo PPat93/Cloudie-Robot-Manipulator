@@ -1,4 +1,4 @@
-# Cloudie — 5-DOF Robotic Arm
+# Cloudie - 5-DOF Robotic Arm
 <img width="900" height="675" alt="image" src="https://github.com/user-attachments/assets/f8bddcc9-bdf4-4dae-80fe-42dd19981371" />
 
 ## Overview
@@ -24,6 +24,47 @@ Precise List:
 - M3 screws, washers and nuts, servo screws
 - several ASG BBs for the base 
 
+## Components for printing
+Below is a table with the parts that need to be printed in order to build the manipulator. Models, created in OpenSCAD format, can be found in the appropriate folder in the repository. 
+
+
+# Pics
+
+
+# Clips
+
+# Inversed kinematics calculations
+The inverse kinematics of the manipulator was calculated manually based on the geometric relationships between its joints and connectors. These calculations allowed for the precise determination of the joint angles required to place the gripper in the desired position in space. I derived the equations based on the previously designed arm components and its complex structure. As a result, the manipulator can reach target points and follow predetermined trajectories.
+The diagrams and calculations are presented below. Each diagram shows one cast of the manipulator (or part thereof).
+
+## Calculations - Part I
+
+
+## Calculations - Part II 
+
+
+## Cleaned up calculations and results
+
+
+# Control and movement
+I have created three ways to control Cloudie: separate, rectilinear, and coordinates movements. Each of them allows for a different type of motion, depending on needs. Originally, the manipulator control was designed to work via the Internet – through the HusarionCloud solution. Therefore, each original software folder contains both the code itself and a simple HTML page of the user interface used to operate the manipulator. 
+
+## Separate movement 
+The manipulator moves each drive individually - each joint separately. Works the same as in an excavator. One key = one joint.
+
+
+## Rectlinear movement
+The manipulator moves only in a straight line – along the imaginary X, Y and Z axes. One key = one axis.
+
+
+## Coordinates movement  
+The manipulator moves directly to predefined Cartesian coordinates. Its zero point (0,0,0) is located at the base of the manipulator - in the middle of the base bearing. The coordinates are entered up front and accepted with a single button press. 
+
+
+# Controller
+The control board used in the manipulator's design is Husarion's Core2. It allows for the simultaneous connection of 5 servo mechanisms and 4 motors with the possibility of control via the Internet.
+<img width="913" height="594" alt="image" src="https://github.com/user-attachments/assets/87be5f75-f3d7-4414-ab8b-719667e7c409" />
+
 # Assembly
 It’s highly recommended to assemble Cloudie from the base up to the gripper.
 Starting elsewhere may cause difficulties when connecting the rotating base to the rest of the arm.
@@ -34,6 +75,5 @@ Most of the assembly process is straightforward - except for the gripper, which 
 
 Once the gripper is installed, the remaining steps simply involve attaching each segment progressively from base to end-effector.
 
-# Controller
-The control board used in the manipulator's design is Husarion's Core2. It allows for the simultaneous connection of 5 servo mechanisms and 4 motors with the possibility of control via the Internet.
-<img width="913" height="594" alt="image" src="https://github.com/user-attachments/assets/87be5f75-f3d7-4414-ab8b-719667e7c409" />
+# Wiring
+Thanks to the design of the CORE2 control board, all servos and motor are connected directly to the designated connectors. The connections are simple, as shown in the diagram below.
