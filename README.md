@@ -1,4 +1,4 @@
-# Cloudie — 5-DOF Robotic Arm
+# Cloudie - 5-DOF Robotic Arm
 <img width="900" height="675" alt="image" src="https://github.com/user-attachments/assets/f8bddcc9-bdf4-4dae-80fe-42dd19981371" />
 
 ## Overview
@@ -33,6 +33,8 @@ Most of the assembly process is straightforward - except for the gripper, which 
 <img width="1280" height="805" alt="image" src="https://github.com/user-attachments/assets/397a2348-c1c7-4327-8178-50cc18ade308" />
 
 Once the gripper is installed, the remaining steps simply involve attaching each segment progressively from base to end-effector.
+
+# 
 
 # Controller
 The control board used in the manipulator's design is Husarion's Core2. It allows for the simultaneous connection of 5 servo mechanisms and 4 motors with the possibility of control via the Internet.

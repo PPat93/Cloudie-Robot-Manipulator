@@ -140,7 +140,7 @@ void servoMotionXYZ()
 	hServoModule.s4.calibrate(-90, 800, 90, 2400);
 	hServoModule.s5.calibrate(-90, 800, 90, 2400);
 
-	while (1) {                     //reversed kinematics calculations
+	while (1) {                     //inversed kinematics calculations
 		sys.delay(10);
 
 		tetar = teta * M_PI / 180;
