@@ -26,9 +26,22 @@ Precise List:
 
 # Pics
 
+
 # Clips
 
+
 # Inversed kinematics calculations
+The inverse kinematics of the manipulator was calculated manually based on the geometric relationships between its joints and connectors. These calculations allowed for the precise determination of the joint angles required to place the gripper in the desired position in space. I derived the equations based on the previously designed arm components and its complex structure. As a result, the manipulator can reach target points and follow predetermined trajectories.
+The diagrams and calculations are presented below. Each diagram shows one cast of the manipulator (or part thereof).
+
+## Part I calcs
+
+
+## Part II calcs
+
+
+## Cleaned up calculations and results
+
 
 # Control and movement
 I have created three ways to control Cloudie: separate, rectilinear, and coordinates movements. Each of them allows for a different type of motion, depending on needs. Originally, the manipulator control was designed to work via the Internet – through the HusarionCloud solution. Therefore, each original software folder contains both the code itself and a simple HTML page of the user interface used to operate the manipulator. 
