@@ -24,6 +24,31 @@ Precise List:
 - M3 screws, washers and nuts, servo screws
 - several ASG BBs for the base 
 
+# Pics
+
+# Clips
+
+# Inversed kinematics calculations
+
+# Control and movement
+I have created three ways to control Cloudie: separate, rectilinear, and coordinates movements. Each of them allows for a different type of motion, depending on needs. Originally, the manipulator control was designed to work via the Internet – through the HusarionCloud solution. Therefore, each original software folder contains both the code itself and a simple HTML page of the user interface used to operate the manipulator. 
+
+## Separate movement 
+The manipulator moves each drive individually - each joint separately. Works the same as in an excavator. One key = one joint.
+
+
+## Rectlinear movement
+The manipulator moves only in a straight line – along the imaginary X, Y and Z axes. One key = one axis.
+
+
+## Coordinates movement  
+The manipulator moves directly to predefined Cartesian coordinates. Its zero point (0,0,0) is located at the base of the manipulator - in the middle of the base bearing. The coordinates are entered up front and accepted with a single button press. 
+
+
+# Controller
+The control board used in the manipulator's design is Husarion's Core2. It allows for the simultaneous connection of 5 servo mechanisms and 4 motors with the possibility of control via the Internet.
+<img width="913" height="594" alt="image" src="https://github.com/user-attachments/assets/87be5f75-f3d7-4414-ab8b-719667e7c409" />
+
 # Assembly
 It’s highly recommended to assemble Cloudie from the base up to the gripper.
 Starting elsewhere may cause difficulties when connecting the rotating base to the rest of the arm.
@@ -34,8 +59,5 @@ Most of the assembly process is straightforward - except for the gripper, which 
 
 Once the gripper is installed, the remaining steps simply involve attaching each segment progressively from base to end-effector.
 
-# 
-
-# Controller
-The control board used in the manipulator's design is Husarion's Core2. It allows for the simultaneous connection of 5 servo mechanisms and 4 motors with the possibility of control via the Internet.
-<img width="913" height="594" alt="image" src="https://github.com/user-attachments/assets/87be5f75-f3d7-4414-ab8b-719667e7c409" />
+# Wiring
+Thanks to the design of the CORE2 control board, all servos and motor are connected directly to the designated connectors. The connections are simple, as shown in the diagram below.
