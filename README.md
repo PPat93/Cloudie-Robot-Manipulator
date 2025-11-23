@@ -24,20 +24,23 @@ Precise List:
 - M3 screws, washers and nuts, servo screws
 - several ASG BBs for the base 
 
+## Components for printing
+Below is a table with the parts that need to be printed in order to build the manipulator. Models, created in OpenSCAD format, can be found in the appropriate folder in the repository. 
+
+
 # Pics
 
 
 # Clips
 
-
 # Inversed kinematics calculations
 The inverse kinematics of the manipulator was calculated manually based on the geometric relationships between its joints and connectors. These calculations allowed for the precise determination of the joint angles required to place the gripper in the desired position in space. I derived the equations based on the previously designed arm components and its complex structure. As a result, the manipulator can reach target points and follow predetermined trajectories.
 The diagrams and calculations are presented below. Each diagram shows one cast of the manipulator (or part thereof).
 
-## Part I calcs
+## Calculations - Part I
 
 
-## Part II calcs
+## Calculations - Part II 
 
 
 ## Cleaned up calculations and results
